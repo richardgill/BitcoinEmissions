@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     16203,        348]
-NotebookOptionsPosition[     15870,        331]
-NotebookOutlinePosition[     16226,        347]
-CellTagsIndexPosition[     16183,        344]
+NotebookDataLength[     17580,        377]
+NotebookOptionsPosition[     17247,        360]
+NotebookOutlinePosition[     17603,        376]
+CellTagsIndexPosition[     17560,        373]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -48,7 +48,20 @@ Cell[BoxData[
    RowBox[{"HashEnergyEfficiencyDefault", " ", ":=", " ", "2000"}], 
    "\[IndentingNewLine]", " ", "\[IndentingNewLine]", 
    RowBox[{"JoulesIn1kWh", ":=", " ", "3600000"}], "\[IndentingNewLine]", 
-   RowBox[{"GramsInKilogram", " ", ":=", " ", "1000"}], "\[IndentingNewLine]", 
+   RowBox[{"GramsInKilogram", " ", ":=", " ", "1000"}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"25", " ", "BTC", " ", "per", " ", "10", " ", 
+      RowBox[{"minutes", ".", " ", 
+       RowBox[{"http", ":"}]}]}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"tradeblock", ".", "com"}], "/", "research"}], "/", 
+       "bitcoin"}], "-", 
+      RowBox[{"101", "/", "how"}], "-", "are", "-", "bitcoins", "-", 
+      RowBox[{"created", "/"}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{"BTCPerSecond", " ", ":=", 
     RowBox[{"25", " ", "/", 
      RowBox[{"(", 
@@ -127,6 +140,16 @@ Cell[BoxData[
         RowBox[{"i", ",", 
          RowBox[{"Length", "[", "HistoricalHashRate", "]"}]}], "}"}]}], 
       "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"We", " ", 
+     RowBox[{"couldn", "'"}], "t", " ", "get", " ", "an", " ", "expoential", 
+     " ", "function", " ", "to", " ", "fit", " ", 
+     RowBox[{"properly", " ", ":", 
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{".", " ", "We"}], " ", "used", " ", "this", " ", "HACK", " ", 
+        
+        RowBox[{"instead", "."}]}]}]}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{"Model", ":=", 
     RowBox[{"Fit", "[", 
      RowBox[{"HistoricalHashRateWithAbsoluteTime", ",", " ", 
@@ -189,14 +212,14 @@ Cell[BoxData[
     RowBox[{
      RowBox[{
       RowBox[{"FKgCO2PerBTC", "[", 
-       RowBox[{"EEff", ",", "HEff", ",", 
+       RowBox[{"EnergyEfficiency", ",", "HashEnergyEfficiency", ",", 
         RowBox[{"HashRateAtT", "[", 
          RowBox[{"Year", ",", " ", "Month", ",", " ", "1"}], "]"}]}], "]"}], 
       "\"\<kg of CO2 per BTC\>\""}], ",", "\[IndentingNewLine]", "\t", 
      RowBox[{"{", 
-      RowBox[{"EEff", ",", "0", ",", "1000"}], "}"}], ",", 
+      RowBox[{"EnergyEfficiency", ",", "0", ",", "1000"}], "}"}], ",", 
      RowBox[{"{", 
-      RowBox[{"HEff", ",", "0", ",", "5000"}], "}"}], ",", 
+      RowBox[{"HashEnergyEfficiency", ",", "0", ",", "5000"}], "}"}], ",", 
      RowBox[{"{", 
       RowBox[{"Year", ",", "2010", ",", "2025", ",", " ", "1"}], "}"}], ",", 
      RowBox[{"{", 
@@ -205,8 +228,9 @@ Cell[BoxData[
      RowBox[{"Initialization", "\[RuleDelayed]", 
       RowBox[{"(", 
        RowBox[{
-        RowBox[{"EEff", ":=", "EnergyEfficiencyDefault"}], ";", 
-        RowBox[{"HEff", ":=", "HashEnergyEfficiencyDefault"}], ";", " ", 
+        RowBox[{"EnergyEfficiency", ":=", "EnergyEfficiencyDefault"}], ";", 
+        RowBox[{"HashEnergyEfficiency", ":=", "HashEnergyEfficiencyDefault"}],
+         ";", " ", 
         RowBox[{"Year", ":=", "2014"}], ";", " ", 
         RowBox[{"Month", " ", ":=", " ", "1"}]}], ")"}]}]}], "]"}], 
    "\[IndentingNewLine]", "\[IndentingNewLine]", 
@@ -272,52 +296,56 @@ Cell[BoxData[
    3.6082843647009*^9}, 3.60828439470949*^9, 3.608284434368043*^9, {
    3.608284499985745*^9, 3.608284517788927*^9}, {3.608284555568775*^9, 
    3.608284591975337*^9}, {3.608284633458611*^9, 3.6082846736429787`*^9}, {
-   3.608284955760477*^9, 3.6082851031563883`*^9}}],
+   3.608284955760477*^9, 3.6082851031563883`*^9}, {3.6082851785893393`*^9, 
+   3.60828523268682*^9}, {3.608285277609617*^9, 3.6082853539561863`*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`EEff$$ = 492., $CellContext`HEff$$ = 
-    2000, $CellContext`Month$$ = 1, $CellContext`Year$$ = 2015, 
-    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
-    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
-      Hold[$CellContext`EEff$$], 0, 1000}, {
-      Hold[$CellContext`HEff$$], 0, 5000}, {
+   DynamicModuleBox[{$CellContext`EnergyEfficiency$$ = 
+    500, $CellContext`HashEnergyEfficiency$$ = 2000, $CellContext`Month$$ = 
+    5, $CellContext`Year$$ = 2014, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`EnergyEfficiency$$], 0, 1000}, {
+      Hold[$CellContext`HashEnergyEfficiency$$], 0, 5000}, {
       Hold[$CellContext`Year$$], 2010, 2025, 1}, {
       Hold[$CellContext`Month$$], 1, 12, 1}}, Typeset`size$$ = {
     207., {3., 9.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = False, $CellContext`EEff$170041$$ = 
-    0, $CellContext`HEff$170042$$ = 0, $CellContext`Year$170043$$ = 
-    0, $CellContext`Month$170044$$ = 0}, 
+    Typeset`skipInitDone$$ = False, $CellContext`EnergyEfficiency$170924$$ = 
+    0, $CellContext`HashEnergyEfficiency$170925$$ = 
+    0, $CellContext`Year$170926$$ = 0, $CellContext`Month$170927$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
-      "Variables" :> {$CellContext`EEff$$ = 0, $CellContext`HEff$$ = 
-        0, $CellContext`Month$$ = 1, $CellContext`Year$$ = 2010}, 
-      "ControllerVariables" :> {
-        Hold[$CellContext`EEff$$, $CellContext`EEff$170041$$, 0], 
-        Hold[$CellContext`HEff$$, $CellContext`HEff$170042$$, 0], 
-        Hold[$CellContext`Year$$, $CellContext`Year$170043$$, 0], 
-        Hold[$CellContext`Month$$, $CellContext`Month$170044$$, 0]}, 
+      "Variables" :> {$CellContext`EnergyEfficiency$$ = 
+        0, $CellContext`HashEnergyEfficiency$$ = 0, $CellContext`Month$$ = 
+        1, $CellContext`Year$$ = 2010}, "ControllerVariables" :> {
+        Hold[$CellContext`EnergyEfficiency$$, \
+$CellContext`EnergyEfficiency$170924$$, 0], 
+        Hold[$CellContext`HashEnergyEfficiency$$, \
+$CellContext`HashEnergyEfficiency$170925$$, 0], 
+        Hold[$CellContext`Year$$, $CellContext`Year$170926$$, 0], 
+        Hold[$CellContext`Month$$, $CellContext`Month$170927$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
          Typeset`skipInitDone$$}, 
-      "Body" :> $CellContext`FKgCO2PerBTC[$CellContext`EEff$$, \
-$CellContext`HEff$$, 
+      "Body" :> $CellContext`FKgCO2PerBTC[$CellContext`EnergyEfficiency$$, \
+$CellContext`HashEnergyEfficiency$$, 
          $CellContext`HashRateAtT[$CellContext`Year$$, $CellContext`Month$$, 
           1]] "kg of CO2 per BTC", 
-      "Specifications" :> {{$CellContext`EEff$$, 0, 
-         1000}, {$CellContext`HEff$$, 0, 5000}, {$CellContext`Year$$, 2010, 
-         2025, 1}, {$CellContext`Month$$, 1, 12, 1}}, "Options" :> {}, 
-      "DefaultOptions" :> {}],
-     ImageSizeCache->{270., {91., 96.}},
+      "Specifications" :> {{$CellContext`EnergyEfficiency$$, 0, 
+         1000}, {$CellContext`HashEnergyEfficiency$$, 0, 
+         5000}, {$CellContext`Year$$, 2010, 2025, 1}, {$CellContext`Month$$, 
+         1, 12, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{334., {104., 109.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
-    Initialization:>(($CellContext`EEff$$ := \
-$CellContext`EnergyEfficiencyDefault; $CellContext`HEff$$ := \
+    Initialization:>(($CellContext`EnergyEfficiency$$ := \
+$CellContext`EnergyEfficiencyDefault; $CellContext`HashEnergyEfficiency$$ := \
 $CellContext`HashEnergyEfficiencyDefault; $CellContext`Year$$ := 
        2014; $CellContext`Month$$ := 1); Typeset`initDone$$ = True),
     SynchronousInitialization->True,
@@ -326,7 +354,8 @@ $CellContext`HashEnergyEfficiencyDefault; $CellContext`Year$$ :=
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{3.608284875733913*^9, 3.608285105393907*^9}]
+ CellChangeTimes->{3.608284875733913*^9, 3.608285105393907*^9, 
+  3.608285203481832*^9}]
 }, Open  ]]
 },
 WindowSize->{1440, 782},
@@ -347,8 +376,8 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 12571, 252, 726, "Input"],
-Cell[13153, 276, 2701, 52, 204, "Output"]
+Cell[579, 22, 13656, 277, 777, "Input"],
+Cell[14238, 301, 2993, 56, 230, "Output"]
 }, Open  ]]
 }
 ]
