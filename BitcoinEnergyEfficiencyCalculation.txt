@@ -1,0 +1,48 @@
+(* https://en.wikipedia.org/wiki/Electricity_generation# Environmental_concerns 40% of world is coal which is 1000.*)
+EnergyEfficiencyDefault := 500 
+(* https://en.bitcoin.it/wiki/Mining_hardware_comparison Based on some recent asic machines.*)
+HashEnergyEfficiencyDefault := 2000
+ 
+JoulesIn1kWh:= 3600000
+GramsInKilogram := 1000
+
+(* 25 BTC per 10 minutes. http://tradeblock.com/research/bitcoin-101/how-are-bitcoins-created/*)
+BTCPerSecond :=25 /(60 * 10)
+
+FKgOfCO2PerJoule[EEff_]:= (EEff / GramsInKilogram ) / JoulesIn1kWh
+FHashPerSecond[HRate_] := HRate*1000000000
+FHashPerBTC[HRate_] := FHashPerSecond[HRate] / BTCPerSecond
+FHashPerJoule[HEff_] := HEff * 1000000 
+FJoulesPerBTC[HEff_, HRate_] := FHashPerBTC[HRate]  / FHashPerJoule[HEff]
+FKgCO2PerBTC[EEff_,HEff_,HRate_]:= FKgOfCO2PerJoule[EEff] * FJoulesPerBTC[HEff, HRate]
+
+ChartDataLocation := "/Users/rgill/Downloads/chart-data.csv"
+(* Get chart data from http://blockchain.info/charts/hash-rate *)
+HistoricalHashRate = Import[ChartDataLocation, "DateStringFormat"-> {"Day", "/", "Month", "/", "Year", " ", "Time"}];
+
+HistoricalHashRateWithAbsoluteTime=Table[{AbsoluteTime[HistoricalHashRate[[i,1]]],HistoricalHashRate[[i,2]]},{i,Length[HistoricalHashRate]}];
+
+(* We couldn't get an expoential function to fit properly :( . We used this HACK instead.*)
+Model:=Fit[HistoricalHashRateWithAbsoluteTime, {1,x, x^2, x^3, x^4, x^5, x^6, x^7},x]
+
+(* This shows our fitted function of historial hash rates against the real data.
+Show[
+ListPlot[newdata],
+Plot[Model, {x,3.58 * 10 ^ 9,3.805* 10 ^ 9}, PlotStyle->Red],
+PlotRange ->  {{3.58 * 10 ^ 9,3.635* 10 ^ 9},{0,100000000}}
+]
+*)
+
+HashRateAtT[year_, month_, day_] := Model /. {x ->  {AbsoluteTime[{year,month,day, 0,0,0}]}}
+
+
+Manipulate[
+	FKgCO2PerBTC[EnergyEfficiency,HashEnergyEfficiency,HashRateAtT[Year, Month, 1]]"kg of CO2 per BTC",
+	{EnergyEfficiency,0,1000},{HashEnergyEfficiency,0,5000},{Year,2010,2025, 1},{Month,1,12, 1},
+	Initialization:>(EnergyEfficiency:=EnergyEfficiencyDefault;HashEnergyEfficiency:=HashEnergyEfficiencyDefault; Year:=2014; Month := 1)]
+
+
+
+Out[528]= Manipulate[FKgCO2PerBTC[EnergyEfficiency, HashEnergyEfficiency, HashRateAtT[Year, Month, 1]]*"kg of CO2 per BTC", {{EnergyEfficiency, 500}, 0, 1000}, 
+  {{HashEnergyEfficiency, 2000}, 0, 5000}, {{Year, 2014}, 2010, 2025, 1}, {{Month, 5}, 1, 12, 1}, 
+  Initialization :> (EnergyEfficiency := EnergyEfficiencyDefault; HashEnergyEfficiency := HashEnergyEfficiencyDefault; Year := 2014; Month := 1)]
