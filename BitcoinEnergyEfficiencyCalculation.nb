@@ -10,187 +10,207 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     12170,        269]
-NotebookOptionsPosition[     11913,        255]
-NotebookOutlinePosition[     12269,        271]
-CellTagsIndexPosition[     12226,        268]
+NotebookDataLength[     16203,        348]
+NotebookOptionsPosition[     15870,        331]
+NotebookOutlinePosition[     16226,        347]
+CellTagsIndexPosition[     16183,        344]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-Cell[BoxData[{
- RowBox[{"JoulesIn1kWh", ":=", " ", "3600000"}], "\[IndentingNewLine]", 
- RowBox[{"GramsInKilogram", " ", ":=", " ", "1000"}], "\[IndentingNewLine]", 
+
+Cell[CellGroupData[{
+Cell[BoxData[
  RowBox[{
-  RowBox[{"BTCPerSecond", " ", ":=", 
-   RowBox[{"25", " ", "/", 
-    RowBox[{"(", 
-     RowBox[{"60", " ", "*", " ", "10"}], ")"}]}]}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"FKgOfCO2PerJoule", "[", "EEff_", "]"}], ":=", " ", 
-  RowBox[{
-   RowBox[{"(", 
-    RowBox[{"EEff", " ", "/", " ", "GramsInKilogram"}], " ", ")"}], " ", "/", 
-   " ", "JoulesIn1kWh"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"FHashPerSecond", "[", "HRate_", "]"}], " ", ":=", " ", 
-  RowBox[{"HRate", "*", "1000000000"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"FHashPerBTC", "[", "HRate_", "]"}], " ", ":=", " ", 
-  RowBox[{
-   RowBox[{"FHashPerSecond", "[", "HRate", "]"}], " ", "/", " ", 
-   "BTCPerSecond"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"FHashPerJoule", "[", "HEff_", "]"}], " ", ":=", " ", 
-   RowBox[{"HEff", " ", "*", " ", "1000000"}]}], " "}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"FJoulesPerBTC", "[", 
-   RowBox[{"HEff_", ",", " ", "HRate_"}], "]"}], " ", ":=", " ", 
-  RowBox[{
-   RowBox[{"FHashPerBTC", "[", "HRate", "]"}], "  ", "/", " ", 
-   RowBox[{"FHashPerJoule", "[", "HEff", "]"}]}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"FKgCO2PerBTC", "[", 
-    RowBox[{"EEff_", ",", "HEff_", ",", "HRate_"}], "]"}], ":=", " ", 
-   RowBox[{
-    RowBox[{"FKgOfCO2PerJoule", "[", "EEff", "]"}], " ", "*", " ", 
-    RowBox[{"FJoulesPerBTC", "[", 
-     RowBox[{"HEff", ",", " ", "HRate"}], "]"}]}]}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-  "ChartDataLocation", " ", ":=", " ", 
-   "\"\</Users/rgill/Downloads/chart-data.csv\>\""}], "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
-    RowBox[{"Get", " ", "chart", " ", "data", " ", "from", " ", 
-     RowBox[{"http", ":"}]}], "//", 
+    RowBox[{"https", ":"}], "//", 
     RowBox[{
      RowBox[{
       RowBox[{
-       RowBox[{"blockchain", ".", "info"}], "/", "charts"}], "/", "hash"}], 
-     "-", "rate"}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
+       RowBox[{"en", ".", "wikipedia", ".", "org"}], "/", "wiki"}], "/", 
+      "Electricity_generation"}], "#", "Environmental_concerns", " ", "40", 
+     "%", " ", "of", " ", "world", " ", "is", " ", "coal", " ", "which", " ", 
+     "is", " ", "1000."}]}], "*)"}], "\[IndentingNewLine]", 
   RowBox[{
-   RowBox[{"HistoricalHashRate", " ", "=", " ", 
-    RowBox[{"Import", "[", 
-     RowBox[{"ChartDataLocation", ",", " ", 
-      RowBox[{"\"\<DateStringFormat\>\"", "\[Rule]", " ", 
+   RowBox[{"EnergyEfficiencyDefault", " ", ":=", " ", "500"}], " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"https", ":"}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"en", ".", "bitcoin", ".", "it"}], "/", "wiki"}], "/", 
+       "Mining_hardware"}], "_comparison", " ", "Based", " ", "on", " ", 
+      "some", " ", "recent", " ", "asic", " ", 
+      RowBox[{"machines", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"HashEnergyEfficiencyDefault", " ", ":=", " ", "2000"}], 
+   "\[IndentingNewLine]", " ", "\[IndentingNewLine]", 
+   RowBox[{"JoulesIn1kWh", ":=", " ", "3600000"}], "\[IndentingNewLine]", 
+   RowBox[{"GramsInKilogram", " ", ":=", " ", "1000"}], "\[IndentingNewLine]", 
+   RowBox[{"BTCPerSecond", " ", ":=", 
+    RowBox[{"25", " ", "/", 
+     RowBox[{"(", 
+      RowBox[{"60", " ", "*", " ", "10"}], ")"}]}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FKgOfCO2PerJoule", "[", "EEff_", "]"}], ":=", " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"EEff", " ", "/", " ", "GramsInKilogram"}], " ", ")"}], " ", 
+     "/", " ", "JoulesIn1kWh"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FHashPerSecond", "[", "HRate_", "]"}], " ", ":=", " ", 
+    RowBox[{"HRate", "*", "1000000000"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FHashPerBTC", "[", "HRate_", "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{"FHashPerSecond", "[", "HRate", "]"}], " ", "/", " ", 
+     "BTCPerSecond"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FHashPerJoule", "[", "HEff_", "]"}], " ", ":=", " ", 
+    RowBox[{"HEff", " ", "*", " ", "1000000"}]}], " ", "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{"FJoulesPerBTC", "[", 
+     RowBox[{"HEff_", ",", " ", "HRate_"}], "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{"FHashPerBTC", "[", "HRate", "]"}], "  ", "/", " ", 
+     RowBox[{"FHashPerJoule", "[", "HEff", "]"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FKgCO2PerBTC", "[", 
+     RowBox[{"EEff_", ",", "HEff_", ",", "HRate_"}], "]"}], ":=", " ", 
+    RowBox[{
+     RowBox[{"FKgOfCO2PerJoule", "[", "EEff", "]"}], " ", "*", " ", 
+     RowBox[{"FJoulesPerBTC", "[", 
+      RowBox[{"HEff", ",", " ", "HRate"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "ChartDataLocation", " ", ":=", " ", 
+    "\"\</Users/rgill/Downloads/chart-data.csv\>\""}], "\[IndentingNewLine]", 
+   
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Get", " ", "chart", " ", "data", " ", "from", " ", 
+      RowBox[{"http", ":"}]}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"blockchain", ".", "info"}], "/", "charts"}], "/", "hash"}], 
+      "-", "rate"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"HistoricalHashRate", " ", "=", " ", 
+     RowBox[{"Import", "[", 
+      RowBox[{"ChartDataLocation", ",", " ", 
+       RowBox[{"\"\<DateStringFormat\>\"", "\[Rule]", " ", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Day\>\"", ",", " ", "\"\</\>\"", ",", " ", "\"\<Month\>\"", ",",
+           " ", "\"\</\>\"", ",", " ", "\"\<Year\>\"", ",", " ", "\"\< \>\"", 
+          ",", " ", "\"\<Time\>\""}], "}"}]}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"HistoricalHashRateWithAbsoluteTime", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
        RowBox[{"{", 
         RowBox[{
-        "\"\<Day\>\"", ",", " ", "\"\</\>\"", ",", " ", "\"\<Month\>\"", ",", 
-         " ", "\"\</\>\"", ",", " ", "\"\<Year\>\"", ",", " ", "\"\< \>\"", 
-         ",", " ", "\"\<Time\>\""}], "}"}]}]}], "]"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"HistoricalHashRateWithAbsoluteTime", "=", 
-    RowBox[{"Table", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"AbsoluteTime", "[", 
+         RowBox[{"AbsoluteTime", "[", 
+          RowBox[{"HistoricalHashRate", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}], ",", 
          RowBox[{"HistoricalHashRate", "[", 
           RowBox[{"[", 
-           RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}], ",", 
-        RowBox[{"HistoricalHashRate", "[", 
-         RowBox[{"[", 
-          RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+           RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", 
+         RowBox[{"Length", "[", "HistoricalHashRate", "]"}]}], "}"}]}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Model", ":=", 
+    RowBox[{"Fit", "[", 
+     RowBox[{"HistoricalHashRateWithAbsoluteTime", ",", " ", 
       RowBox[{"{", 
-       RowBox[{"i", ",", 
-        RowBox[{"Length", "[", "HistoricalHashRate", "]"}]}], "}"}]}], 
-     "]"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Model", ":=", 
-   RowBox[{"Fit", "[", 
-    RowBox[{"HistoricalHashRateWithAbsoluteTime", ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", "x", ",", " ", 
-       RowBox[{"x", "^", "2"}], ",", " ", 
-       RowBox[{"x", "^", "3"}], ",", " ", 
-       RowBox[{"x", "^", "4"}], ",", " ", 
-       RowBox[{"x", "^", "5"}], ",", " ", 
-       RowBox[{"x", "^", "6"}], ",", " ", 
-       RowBox[{"x", "^", "7"}]}], "}"}], ",", "x"}], "]"}]}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", " ", 
-   RowBox[{
-   "This", " ", "shows", " ", "our", " ", "fitted", " ", "function", " ", 
-    "of", " ", "historial", " ", "hash", " ", "rates", " ", "against", " ", 
-    "the", " ", "real", " ", 
-    RowBox[{"data", ".", "\[IndentingNewLine]", 
-     RowBox[{"Show", "[", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"ListPlot", "[", "newdata", "]"}], ",", "\[IndentingNewLine]", 
-       
-       RowBox[{"Plot", "[", 
-        RowBox[{"Model", ",", " ", 
-         RowBox[{"{", 
-          RowBox[{"x", ",", 
-           RowBox[{"3.58", " ", "*", " ", 
-            RowBox[{"10", " ", "^", " ", "9"}]}], ",", 
-           RowBox[{"3.805", "*", " ", 
-            RowBox[{"10", " ", "^", " ", "9"}]}]}], "}"}], ",", " ", 
-         RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}], ",", 
-       "\[IndentingNewLine]", 
-       RowBox[{"PlotRange", " ", "\[Rule]", "  ", 
-        RowBox[{"{", 
-         RowBox[{
+       RowBox[{"1", ",", "x", ",", " ", 
+        RowBox[{"x", "^", "2"}], ",", " ", 
+        RowBox[{"x", "^", "3"}], ",", " ", 
+        RowBox[{"x", "^", "4"}], ",", " ", 
+        RowBox[{"x", "^", "5"}], ",", " ", 
+        RowBox[{"x", "^", "6"}], ",", " ", 
+        RowBox[{"x", "^", "7"}]}], "}"}], ",", "x"}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "This", " ", "shows", " ", "our", " ", "fitted", " ", "function", " ", 
+     "of", " ", "historial", " ", "hash", " ", "rates", " ", "against", " ", 
+     "the", " ", "real", " ", 
+     RowBox[{"data", ".", "\[IndentingNewLine]", 
+      RowBox[{"Show", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ListPlot", "[", "newdata", "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Plot", "[", 
+         RowBox[{"Model", ",", " ", 
           RowBox[{"{", 
-           RowBox[{
+           RowBox[{"x", ",", 
             RowBox[{"3.58", " ", "*", " ", 
              RowBox[{"10", " ", "^", " ", "9"}]}], ",", 
-            RowBox[{"3.635", "*", " ", 
-             RowBox[{"10", " ", "^", " ", "9"}]}]}], "}"}], ",", 
-          RowBox[{"{", 
-           RowBox[{"0", ",", "100000000"}], "}"}]}], "}"}]}]}], 
-      "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "*)"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"HashRateAtT", "[", 
-    RowBox[{"year_", ",", " ", "month_", ",", " ", "day_"}], "]"}], " ", ":=",
-    " ", 
-   RowBox[{"Model", " ", "/.", " ", 
-    RowBox[{"{", 
-     RowBox[{"x", " ", "\[Rule]", "  ", 
-      RowBox[{"{", 
-       RowBox[{"AbsoluteTime", "[", 
-        RowBox[{"{", 
-         RowBox[{
-         "year", ",", "month", ",", "day", ",", " ", "0", ",", "0", ",", 
-          "0"}], "}"}], "]"}], "}"}]}], "}"}]}]}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", "\t", 
+            RowBox[{"3.805", "*", " ", 
+             RowBox[{"10", " ", "^", " ", "9"}]}]}], "}"}], ",", " ", 
+          RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"PlotRange", " ", "\[Rule]", "  ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"3.58", " ", "*", " ", 
+              RowBox[{"10", " ", "^", " ", "9"}]}], ",", 
+             RowBox[{"3.635", "*", " ", 
+              RowBox[{"10", " ", "^", " ", "9"}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "100000000"}], "}"}]}], "}"}]}]}], 
+       "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
+    RowBox[{"HashRateAtT", "[", 
+     RowBox[{"year_", ",", " ", "month_", ",", " ", "day_"}], "]"}], " ", ":=",
+     " ", 
+    RowBox[{"Model", " ", "/.", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", " ", "\[Rule]", "  ", 
+       RowBox[{"{", 
+        RowBox[{"AbsoluteTime", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "year", ",", "month", ",", "day", ",", " ", "0", ",", "0", ",", 
+           "0"}], "}"}], "]"}], "}"}]}], "}"}]}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", "\t", 
     RowBox[{
-     RowBox[{"FKgCO2PerBTC", "[", 
-      RowBox[{"EEff", ",", "HEff", ",", 
-       RowBox[{"HashRateAtT", "[", 
-        RowBox[{"Year", ",", " ", "Month", ",", " ", "1"}], "]"}]}], "]"}], 
-     "\"\<kg of CO2 per BTC\>\""}], ",", "\[IndentingNewLine]", "\t", 
-    RowBox[{"{", 
-     RowBox[{"EEff", ",", "0", ",", "1000"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"HEff", ",", "0", ",", "5000"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"Year", ",", "2010", ",", "2025", ",", " ", "1"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"Month", ",", "1", ",", "12", ",", " ", "1"}], "}"}], ",", 
-    "\[IndentingNewLine]", "\t", 
-    RowBox[{"Initialization", "\[RuleDelayed]", 
-     RowBox[{"(", 
-      RowBox[{
-       RowBox[{"EEff", ":=", "500"}], ";", 
-       RowBox[{"HEff", ":=", "2000"}], ";", " ", 
-       RowBox[{"Year", ":=", "2014"}], ";", " ", 
-       RowBox[{"Month", " ", ":=", " ", "1"}]}], ")"}]}]}], "]"}], 
-  "\[IndentingNewLine]", 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+     RowBox[{
+      RowBox[{"FKgCO2PerBTC", "[", 
+       RowBox[{"EEff", ",", "HEff", ",", 
+        RowBox[{"HashRateAtT", "[", 
+         RowBox[{"Year", ",", " ", "Month", ",", " ", "1"}], "]"}]}], "]"}], 
+      "\"\<kg of CO2 per BTC\>\""}], ",", "\[IndentingNewLine]", "\t", 
+     RowBox[{"{", 
+      RowBox[{"EEff", ",", "0", ",", "1000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"HEff", ",", "0", ",", "5000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Year", ",", "2010", ",", "2025", ",", " ", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Month", ",", "1", ",", "12", ",", " ", "1"}], "}"}], ",", 
+     "\[IndentingNewLine]", "\t", 
+     RowBox[{"Initialization", "\[RuleDelayed]", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"EEff", ":=", "EnergyEfficiencyDefault"}], ";", 
+        RowBox[{"HEff", ":=", "HashEnergyEfficiencyDefault"}], ";", " ", 
+        RowBox[{"Year", ":=", "2014"}], ";", " ", 
+        RowBox[{"Month", " ", ":=", " ", "1"}]}], ")"}]}]}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{{3.608235731627756*^9, 3.608235797301935*^9}, {
    3.608235877137067*^9, 3.608235880273666*^9}, {3.608235948692943*^9, 
    3.608235975833913*^9}, {3.608236125160149*^9, 3.6082361527336397`*^9}, {
@@ -251,7 +271,63 @@ Cell[BoxData[{
    3.6082842941786957`*^9, 3.608284311550127*^9}, {3.6082843547650414`*^9, 
    3.6082843647009*^9}, 3.60828439470949*^9, 3.608284434368043*^9, {
    3.608284499985745*^9, 3.608284517788927*^9}, {3.608284555568775*^9, 
-   3.608284591975337*^9}, {3.608284633458611*^9, 3.6082846736429787`*^9}}]
+   3.608284591975337*^9}, {3.608284633458611*^9, 3.6082846736429787`*^9}, {
+   3.608284955760477*^9, 3.6082851031563883`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`EEff$$ = 492., $CellContext`HEff$$ = 
+    2000, $CellContext`Month$$ = 1, $CellContext`Year$$ = 2015, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`EEff$$], 0, 1000}, {
+      Hold[$CellContext`HEff$$], 0, 5000}, {
+      Hold[$CellContext`Year$$], 2010, 2025, 1}, {
+      Hold[$CellContext`Month$$], 1, 12, 1}}, Typeset`size$$ = {
+    207., {3., 9.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`EEff$170041$$ = 
+    0, $CellContext`HEff$170042$$ = 0, $CellContext`Year$170043$$ = 
+    0, $CellContext`Month$170044$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`EEff$$ = 0, $CellContext`HEff$$ = 
+        0, $CellContext`Month$$ = 1, $CellContext`Year$$ = 2010}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`EEff$$, $CellContext`EEff$170041$$, 0], 
+        Hold[$CellContext`HEff$$, $CellContext`HEff$170042$$, 0], 
+        Hold[$CellContext`Year$$, $CellContext`Year$170043$$, 0], 
+        Hold[$CellContext`Month$$, $CellContext`Month$170044$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`FKgCO2PerBTC[$CellContext`EEff$$, \
+$CellContext`HEff$$, 
+         $CellContext`HashRateAtT[$CellContext`Year$$, $CellContext`Month$$, 
+          1]] "kg of CO2 per BTC", 
+      "Specifications" :> {{$CellContext`EEff$$, 0, 
+         1000}, {$CellContext`HEff$$, 0, 5000}, {$CellContext`Year$$, 2010, 
+         2025, 1}, {$CellContext`Month$$, 1, 12, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{270., {91., 96.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`EEff$$ := \
+$CellContext`EnergyEfficiencyDefault; $CellContext`HEff$$ := \
+$CellContext`HashEnergyEfficiencyDefault; $CellContext`Year$$ := 
+       2014; $CellContext`Month$$ := 1); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.608284875733913*^9, 3.608285105393907*^9}]
+}, Open  ]]
 },
 WindowSize->{1440, 782},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -270,7 +346,10 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 11352, 233, 624, "Input"]
+Cell[CellGroupData[{
+Cell[579, 22, 12571, 252, 726, "Input"],
+Cell[13153, 276, 2701, 52, 204, "Output"]
+}, Open  ]]
 }
 ]
 *)
